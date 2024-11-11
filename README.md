@@ -20,13 +20,68 @@ To implement univariate Linear Regression to fit a straight line using least squ
 ```
 /*
 Program to implement univariate Linear Regression to fit a straight line using least squares.
-Developed by: 
-RegisterNumber:  
-*/
+Developed by: # Importing necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Generating synthetic dataset (Univariate)
+np.random.seed(42)  # For reproducibility
+X = 2 * np.random.rand(100, 1)  # 100 random values between 0 and 2
+y = 4 + 3 * X + np.random.randn(100, 1)  # Linear relation with some noise
+
+# Visualizing the dataset
+plt.scatter(X, y)
+plt.title("Scatter Plot of Dataset")
+plt.xlabel("Feature X")
+plt.ylabel("Target y")
+plt.show()
+
+# Splitting the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initializing the Linear Regression model
+model = LinearRegression()
+
+# Fitting the model to the training data
+model.fit(X_train, y_train)
+
+# Getting the model's parameters (slope and intercept)
+slope = model.coef_[0]
+intercept = model.intercept_
+
+print(f"Model parameters: Slope = {slope[0]:.2f}, Intercept = {intercept[0]:.2f}")
+
+# Making predictions using the trained model
+y_pred = model.predict(X_test)
+
+# Evaluating the model's performance
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error (MSE): {mse:.2f}")
+print(f"R-squared (R²) score: {r2:.2f}")
+
+# Visualizing the regression line
+plt.scatter(X_test, y_test, color='blue', label='Test data')
+plt.plot(X_test, y_pred, color='red', label='Regression line')
+plt.title("Linear Regression Fit")
+plt.xlabel("Feature X")
+plt.ylabel("Predicted y")
+plt.legend()
+plt.show()
+
+RegisterNumber:  212221045003
+*/s.leelathesh
 ```
 
 ## Output:
-![best fit line](sam.png)
+Model parameters: Slope = 3.05, Intercept = 4.07
+Mean Squared Error (MSE): 0.96
+R-squared (R²) score: 0.96
+
 
 
 ## Result:
